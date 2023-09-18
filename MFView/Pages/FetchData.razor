@@ -1,0 +1,98 @@
+﻿@page "/fetchdata"
+@inject HttpClient Http
+@using Gellybeans.Pathfinder;
+@using Newtonsoft.Json;
+
+<PageTitle>Character</PageTitle>
+
+<h1>Character</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+    
+<div class="main">
+
+    <div class="header">
+        <img src="asset/PF.png" style="width:400px">
+        <div class="character-info" style="width:700px;background-color:aquamarine;bottom:120px;left:400px;position:relative;height:150px;">
+            <input type="text" />
+        </div>
+        
+    </div>
+    <div class="left">
+        <div class="ability-score-label-container">
+            <div class="ability-score-label"> <b>STR</b> </div>
+            <div class="ability-score-label"> <b>DEX</b> </div>
+            <div class="ability-score-label"> <b>CON</b> </div>
+            <div class="ability-score-label"> <b>INT</b> </div>
+            <div class="ability-score-label"> <b>WIS</b> </div>
+            <div class="ability-score-label"> <b>CHA</b> </div>
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+
+    .character-info > input[type=text] {
+        border: none;
+        border-bottom: 2px solid black;
+    }
+
+    .ability-score-label-container {
+        display: flex;
+        gap: 5px;
+        flex-direction: column;
+        width: 60px;
+        color:white;
+        padding-top: 20px;
+    }
+
+        .ability-score-label {
+            height: 30px;
+            width: 55px;
+            background-color: black;
+            text-align:center;
+            padding-top: 3px;
+        }
+
+    .main {
+        display: grid;
+        grid-template-columns: 550px 550px;
+        grid-template-rows: 150px auto;
+        grid-template-areas:
+            "header header"
+            "left right";
+    }
+
+    .header {
+        grid-area: header;
+        overflow: hidden;
+        background-color: lightblue;
+    }
+
+    .left {
+        grid-area: left;
+    }
+
+    .right {
+        grid-area: right;
+    }
+
+</style>
+
+
+
+@code {
+    private StatBlock statBlock = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        //var results = await Http.GetStringAsync("https://localhost:7249/Api/character/159057660560277504/Gillespe");
+        //var sb = JsonConvert.DeserializeObject<StatBlock>(results);
+        //statBlock = sb;
+    }
+
+}
