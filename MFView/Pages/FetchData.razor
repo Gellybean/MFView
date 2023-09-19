@@ -20,13 +20,15 @@
         
     </div>
     <div class="left">
-        <div class="ability-score-label-container">
-            <div class="ability-score-label"> <b>STR</b> </div>
-            <div class="ability-score-label"> <b>DEX</b> </div>
-            <div class="ability-score-label"> <b>CON</b> </div>
-            <div class="ability-score-label"> <b>INT</b> </div>
-            <div class="ability-score-label"> <b>WIS</b> </div>
-            <div class="ability-score-label"> <b>CHA</b> </div>
+        <div class="ability-score-container">
+            <div style="height:30px;width:60px;" class="black-label"><b>STR</b></div>
+            <div style="height:30px;width:60px;" class="black-label"><b>DEX</b></div>
+            <div style="height:30px;width:60px;" class="black-label"><b>CON</b></div>
+            <div style="height:30px;width:60px;" class="black-label"><b>INT</b></div>
+            <div style="height:30px;width:60px;" class="black-label"><b>WIS</b></div>
+            <div style="height:30px;width:60px;" class="black-label"><b>CHA</b></div>
+
+            <InputText style="height:30px;width:40px;" class="input-box" ValueExpression="@(() => statBlock.Stats["STR_SCORE"].Value.ToString())" ValueChanged="@((string s) => statBlock.Stats["STR_SCORE"] = int.Parse(s))"></InputText>
         </div>
     </div>
 
@@ -40,22 +42,28 @@
         border-bottom: 2px solid black;
     }
 
-    .ability-score-label-container {
+    .ability-score-container {
         display: flex;
         gap: 5px;
         flex-direction: column;
-        width: 60px;
-        color:white;
+        flex-wrap: wrap;
+        height: 250px;
+        width: 300px;
         padding-top: 20px;
     }
 
-        .ability-score-label {
-            height: 30px;
-            width: 55px;
-            background-color: black;
-            text-align:center;
-            padding-top: 3px;
-        }
+    .black-label {     
+        color: white;
+        background-color: black;
+        text-align:center;
+        padding-top: 4px;
+    }
+
+    .input-box {
+        border-width: 1px;
+
+    }
+
 
     .main {
         display: grid;
@@ -85,7 +93,7 @@
 
 
 @code {
-    private StatBlock statBlock = null!;
+    private StatBlock statBlock = StatBlock.DefaultPathfinder("hehe");
 
     protected override async Task OnInitializedAsync()
     {
