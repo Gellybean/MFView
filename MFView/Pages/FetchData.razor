@@ -4,32 +4,201 @@
 @using Newtonsoft.Json;
 
 <PageTitle>Character</PageTitle>
-
-<h1>Character</h1>
-
-<p>This component demonstrates fetching data from the server.</p>
-
     
 <div class="main">
 
     <div class="header">
-        <img src="asset/PF.png" style="width:400px">
-        <div class="character-info" style="width:700px;background-color:aquamarine;bottom:120px;left:400px;position:relative;height:150px;">
-            <input type="text" />
+        <img src="asset/PF.png" style="width:300px">       
+    </div>
+    
+    <div class="label">
+        <div style="display:inline;position:relative;left:67px">Score</div>
+        <div style="display:inline;position:relative;left:78px">Mod</div>
+        <div style="display:inline;position:relative;left:380px">Ranks</div>
+        <div style="display:inline;position:relative;left:388px">Total</div>
+        <div style="display:inline;position:relative;left:590px">Ranks</div>
+        <div style="display:inline;position:relative;left:600px">Total</div>
+    </div>
+   
+    
+    <div style="display:inline-flex" class="stats">             
+        <div style="height:335px;width:290px;">         
+            <div>
+                <div style="display:inline-flex;height:210px;width:150px;" class="stat-container">
+                    <div style="height:30px;width:60px;" class="black-label"><b>STR</b></div>
+                    <div style="height:30px;width:60px;" class="black-label"><b>DEX</b></div>
+                    <div style="height:30px;width:60px;" class="black-label"><b>CON</b></div>
+                    <div style="height:30px;width:60px;" class="black-label"><b>INT</b></div>
+                    <div style="height:30px;width:60px;" class="black-label"><b>WIS</b></div>
+                    <div style="height:30px;width:60px;" class="black-label"><b>CHA</b></div>
+
+                    <button style="height:30px;width:40px;" class="input-box" @onclick="@(async () => await SendExpression("1d20"))">@(statBlock.Stats["STR_SCORE"].Value)</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["DEX_SCORE"].Value)</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["CON_SCORE"].Value)</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["INT_SCORE"].Value)</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["WIS_SCORE"].Value)</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["CHA_SCORE"].Value)</button>
+
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("STR"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("DEX"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("CON"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("INT"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("WIS"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("CHA"))</button>
+                </div>
+
+                <div style="display:inline-flex;padding-left:15px;height:210px;" class="stat-container">
+                    <div style="height:30px;width:60px;" class="black-label"><b>HP</b></div>
+                    <div style="height:30px;width:60px;"></div>
+                    <div style="height:30px;width:60px;" class="black-label"><b>INIT</b></div>
+                    <div style="height:30px;width:60px;" class="black-label"><b>BAB</b></div>
+                    <div style="height:30px;width:60px;" class="black-label"><b>CMB</b></div>
+                    <div style="height:30px;width:60px;" class="black-label"><b>CMD</b></div>
+
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("HP"))</button>
+                    <div style="height:30px;width:60px;"></div>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("INIT"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("BAB"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("CMB"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("CMD"))</button>
+                </div>
+            </div>           
+            
+            <div style="height:20px"></div>
+            
+            <div>
+                <div style="display:inline-flex;height:100px;" class="stat-container">
+                    <div style="height:30px;width:75px;" class="black-label"><b>FORT</b></div>
+                    <div style="height:30px;width:75px;" class="black-label"><b>REF</b></div>
+                    <div style="height:30px;width:75px;" class="black-label"><b>WILL</b></div>
+
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("FORT"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("REF"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("WILL"))</button>
+                </div>
+
+                <div style="display:inline-flex;padding-left:30px;height:100px;" class="stat-container">
+                    <div style="height:30px;width:80px;" class="black-label"><b>AC</b></div>
+                    <div style="height:30px;width:80px;" class="black-label"><b>TOUCH</b></div>
+                    <div style="height:30px;width:80px;" class="black-label"><b>FLAT</b></div>
+
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("AC"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("TOUCH"))</button>
+                    <button style="height:30px;width:40px;" class="input-box">@(statBlock.Resolve("FLAT"))</button>
+                </div>
+            </div>                
         </div>
         
-    </div>
-    <div class="left">
-        <div class="ability-score-container">
-            <div style="height:30px;width:60px;" class="black-label"><b>STR</b></div>
-            <div style="height:30px;width:60px;" class="black-label"><b>DEX</b></div>
-            <div style="height:30px;width:60px;" class="black-label"><b>CON</b></div>
-            <div style="height:30px;width:60px;" class="black-label"><b>INT</b></div>
-            <div style="height:30px;width:60px;" class="black-label"><b>WIS</b></div>
-            <div style="height:30px;width:60px;" class="black-label"><b>CHA</b></div>
 
-            <InputText style="height:30px;width:40px;" class="input-box" ValueExpression="@(() => statBlock.Stats["STR_SCORE"].Value.ToString())" ValueChanged="@((string s) => statBlock.Stats["STR_SCORE"] = int.Parse(s))"></InputText>
-        </div>
+        <div>           
+            <div style="display:inline-flex;height:775px;width:275px;" class="stat-container">               
+                <div style="height:30px;width:150px;" class="skill-label"><b>Acrobatics</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Appraise</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Bluff</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Climb</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Diplomacy</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Disable Device</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Disguise</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Escape Artist</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Fly</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Handle Animal</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Heal</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Intimidate</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Linguistics</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Perception</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Ride</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Sense Motive</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Sleight of Hand</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Spellcraft</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Stealth</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Survival</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Swift</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Use Magic Device</b></div>
+
+                <!--ranks-->
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_ACR"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_APR"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_BLF"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_CLM"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_DIP"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_DSA"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_DSG"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_ESC"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_FLY"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_HND"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_HEA"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_ITM"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_LNG"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_PRC"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_RDE"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_SNS"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_SLT"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_SPL"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_STL"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_SUR"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_SWM"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_UMD"].Base)</button>
+                
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_ACR"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_APR"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_BLF"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_CLM"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_DIP"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_DSA"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_DSG"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_ESC"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_FLY"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_HND"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_HEA"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_ITM"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_LNG"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_PRC"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_RDE"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_SNS"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_SLT"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_SPL"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_STL"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_SUR"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_SWM"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_UMD"].Value)</button>
+
+            </div>
+            <div style="display:inline-flex;height:375px;width:275px;" class="stat-container">
+                <div style="height:30px;width:150px;" class="skill-label"><b>Arcana</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Dungeoneering</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Engineering</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Geography</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>History</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Local</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Nature</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Nobility</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Planes</b></div>
+                <div style="height:30px;width:150px;" class="skill-label"><b>Religion</b></div>
+
+                <!--ranks-->
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_ARC"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_DUN"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_ENG"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_GEO"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_HIS"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_LCL"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_NTR"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_NBL"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_PLN"].Base)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_RLG"].Base)</button>
+
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_ARC"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_DUN"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_ENG"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_GEO"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_HIS"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_LCL"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_NTR"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_NBL"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_PLN"].Value)</button>
+                <button style="height:30px;width:40px;" class="input-box">@(statBlock.Stats["SK_RLG"].Value)</button>
+            </div>
+        </div>         
     </div>
 
 </div>
@@ -42,21 +211,31 @@
         border-bottom: 2px solid black;
     }
 
-    .ability-score-container {
+    .stat-container {
         display: flex;
         gap: 5px;
         flex-direction: column;
         flex-wrap: wrap;
-        height: 250px;
-        width: 300px;
-        padding-top: 20px;
+        align-content: flex-start;
+        
     }
+
 
     .black-label {     
         color: white;
         background-color: black;
         text-align:center;
         padding-top: 4px;
+        border-radius: 3px 10px 10px 3px;
+    }
+
+    .skill-label {
+        color: white;
+        background-color: firebrick;
+        text-align: center;
+        padding-top: 1px;
+        border-style:double;
+        border-radius: 3px 10px 10px 3px;
     }
 
     .input-box {
@@ -66,26 +245,29 @@
 
 
     .main {
+        background-color: lightgray;
         display: grid;
-        grid-template-columns: 550px 550px;
-        grid-template-rows: 150px auto;
+        grid-template-columns: 900px;
+        grid-template-rows: 100px 30px 1000px;
         grid-template-areas:
-            "header header"
-            "left right";
+            "header"
+            "label"
+            "stats";
     }
 
     .header {
         grid-area: header;
         overflow: hidden;
-        background-color: lightblue;
     }
 
-    .left {
-        grid-area: left;
+    .label {
+        grid-area: label;
+        font-size: small;
+        
     }
 
-    .right {
-        grid-area: right;
+    .stats {     
+        grid-area: stats;
     }
 
 </style>
@@ -93,14 +275,24 @@
 
 
 @code {
-    private StatBlock statBlock = StatBlock.DefaultPathfinder("hehe");
+    private StatBlock statBlock;
 
     protected override async Task OnInitializedAsync()
     {
-
-        //var results = await Http.GetStringAsync("https://localhost:7249/Api/character/159057660560277504/Gillespe");
-        //var sb = JsonConvert.DeserializeObject<StatBlock>(results);
-        //statBlock = sb;
+        var results = await Http.GetStringAsync("https://localhost:7249/Api/character/159057660560277504/Gillespe");
+        var sb = JsonConvert.DeserializeObject<StatBlock>(results);
+        statBlock = sb;
     }
 
+    async Task SendExpression(string expr)
+    {
+        var action = new WebAction
+        {
+            Source = statBlock.CharacterName,
+            Action = "expr",
+            Target = expr
+        };
+
+        var response = await Http.PostAsJsonAsync<WebAction>("https://localhost:7249/Api/channel/1027722145540870164", action);
+    }
 }
