@@ -1,0 +1,16 @@
+﻿<fieldset @attributes="@Attributes"  class="container">
+
+</fieldset>
+
+<style>
+	.container {
+
+	}
+</style>
+
+
+@code {
+	
+	[Parameter(CaptureUnmatchedValues = true)]
+	public Dictionary<string, object> Attributes { get; set; }
+}
