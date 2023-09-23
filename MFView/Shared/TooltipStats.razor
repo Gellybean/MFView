@@ -1,0 +1,24 @@
+﻿@using Gellybeans.Pathfinder;
+
+<div class="tooltip-stats">
+	<div>
+
+	</div>
+	@ChildContent
+</div>
+
+<style>
+
+
+
+</style>
+
+
+@code {
+
+	[Parameter] public string Stat { get; set; }
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public StatBlock StatBlock { get; set; }
+
+
+}
