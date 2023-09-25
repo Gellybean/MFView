@@ -73,6 +73,11 @@
         border-bottom: 2px solid black;
     }
 
+    .expression-list {
+        height: 500px;
+        overflow: scroll;
+    }
+
     .message-box {
         display: flex;
         flex-direction: column;
@@ -494,6 +499,10 @@
         {
             @(BonusWindow())
         }
+        @if(statBlock != null && exprListVisible)
+        {
+            @(ExpressionList())
+        }
     </div>
 
     @if(currentMessage != "")
@@ -522,8 +531,10 @@
     bool messageVisible = true;
     string currentMessage = "";
 
-    bool statDetailsVisible = true;
+    bool statDetailsVisible = false;
     bool addBonusVisible = true;
+
+    bool exprListVisible = true;
 
     string exprInput = "";
 
@@ -581,6 +592,20 @@
         <div>@message</div>
         <div style="height:25px"></div>
         <button @onclick=@(() =>  currentMessage = "" ) style="width:50px">OK</button>
+        </div>
+    ;
+    }
+
+    RenderFragment ExpressionList()
+    {
+        return
+    @<div class="expression-list">
+        @foreach(var expr in statBlock.Expressions)
+        {
+            <div>
+                <span>@($"{expr.Key}: {expr.Value}")</span>
+            </div>
+        }
     </div>;
     }
 
